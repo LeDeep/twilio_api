@@ -1,0 +1,10 @@
+require 'faraday'
+require 'rspec'
+# require 'active_record'
+require 'json'
+require 'base64'
+require 'webmock/rspec'
+# require 'active_model'
+# require 'shoulda-matchers'
+
+require 'phone_number'
