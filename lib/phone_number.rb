@@ -1,10 +1,11 @@
 class PhoneNumber
+  attr_reader :number
 
   def initialize(number)
-    @number = number
+    @number = number.gsub(/[^\d]/,'')
   end
 
   def valid?
-    @number.split('-').join('').length == 10
+    @number.gsub(/[^\d]/,'').length == 10
   end
 end

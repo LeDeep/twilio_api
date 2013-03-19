@@ -8,12 +8,6 @@ describe PhoneNumber do
       phone_number.valid?.should be_true
     end
 
-  
-
-    #it {should validate_presence_of :number}
-    # it {should allow_value('916-432-1234').for (:number)}
-    # it {should_not allow_value('444-323-123').for (:number)}
-
   end  
 
 
