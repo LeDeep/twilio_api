@@ -6,6 +6,6 @@ class PhoneNumber
   end
 
   def valid?
-    @number.gsub(/[^\d]/,'').length == 10
+    @number.length == 10
   end
 end

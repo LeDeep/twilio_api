@@ -1,19 +1,19 @@
 require './lib/phone_number'
 require './lib/message'
-require './lib/twilio'
+require './lib/sms'
 require 'json'
 require 'base64'
 
-TEST_ACCOUNT_SID = 'ACcacd3ee8f71f0df754c0155135fbd703'
-TEST_AUTH_TOKEN = '78065a09051d03ca60815ef4d5b5bc78'
-FROM_NUMBER = '+15005550006'
+TEST_ACCOUNT_SID = 'AC19be48dc7ef9350bf49b8fc1598650ca'
+TEST_AUTH_TOKEN = '515ae2ce41f03a6b5a1f8f7565776da6'
+FROM_NUMBER = '+19162264348'
 
 def welcome
   puts "Welcome to the Epicodus text message sender."
-  # puts "Enter your Twilio username: "
-  # $twilio_username = gets.chomp
-  # puts "Enter your Twilio password: "
-  # $twilio_password = gets.chomp
+  # puts "Enter your Sms username: "
+  # $sms_username = gets.chomp
+  # puts "Enter your Sms password: "
+  # $sms_password = gets.chomp
   menu
 end
 
@@ -42,13 +42,10 @@ def sms
   numbers.each { |phone| puts "   #{phone.number}"}
   puts "Are you sure you would like to send the above message to the above numbers? (y/n)"
   if gets.chomp.downcase == 'y'
-    client = Twilio.new
+    client = Sms.new
     numbers.each do |phone|
-      if client.sms(phone.number,message.content,FROM_NUMBER)
-        puts client.message
-      else
-        puts client.message
-      end
+      client.send_message(phone.number, message.content, FROM_NUMBER)
+      puts client.message
     end
   end
 
@@ -75,11 +72,11 @@ end
 def get_message_body
   puts "Please enter the message you would like to send (up to 160):"
   message = Message.new(gets.chomp)
-  unless message.valid?
-    puts "Invalid"
-    message_body
-  else
+  if message.valid?
     message
+  else
+    puts "Invalid"
+    get_message_body
   end
 end 
   
